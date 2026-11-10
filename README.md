@@ -1,71 +1,82 @@
+<div align="center">
+
 # Kopya
 
-Kopya is a free file converter for documents, images and audio that runs entirely in the browser. Files are never uploaded anywhere, which makes it safe for confidential documents and lets it run on GitHub Pages with no server.
+**Convert PDFs, Word files, slides, e-books, images and audio right in your browser. Your files never leave your device.**
 
-## What it converts
+![Status: Shipped](https://img.shields.io/badge/status-shipped-brightgreen)
+![Platform: Web](https://img.shields.io/badge/platform-web-blue)
+![Files stay on your device](https://img.shields.io/badge/files-stay%20on%20your%20device-ffe566)
+![No account needed](https://img.shields.io/badge/account-not%20needed-lightgrey)
 
-| Conversion | How well it works |
-|---|---|
-| PDF → JPG | Pixel-perfect page images. Several pages download as a ZIP. |
-| PDF → Word (.docx) | Editable text with headings, bold and italics. Scanned pages come through as pictures. Pictures inside a text PDF aren’t carried over. There’s also an “exact look” mode that places each page as a picture. |
-| PDF → Excel (.xlsx) | Rows and columns rebuilt from the text’s position. Best on simple tables. |
-| PDF → EPUB | Reflowable e-book with chapters taken from the headings. Running headers, footers and page numbers are removed. |
-| Word (.docx) → PDF | Styles, lists, tables, images, headers, footers and page numbers. Fonts that aren’t installed are swapped for similar ones. |
-| PowerPoint (.pptx) → PDF | Themes, layouts, text, shapes, pictures, tables, groups and SmartArt. Charts aren’t drawn yet. |
-| EPUB → PDF | A5, A4 or Letter pages with page numbers and the cover. DRM-protected books can’t be converted. |
+<img src="docs/screenshots/hero-1920x1080.png" alt="Kopya converting a PDF to Word and three images to JPG, with the files shown as stacked photocopies" width="880">
 
-### Images
+<img src="docs/screenshots/hero-1680x1050.png" alt="Kopya's tool list beside the PDF to Word and image converters" width="880">
 
-One tool converts between **JPG, PNG, WebP, AVIF and BMP**, and also opens **GIF, SVG and HEIC** (iPhone photos).
+## About
 
-| Feature | Notes |
-|---|---|
-| JPG, PNG, WebP, BMP | Drawn and saved by the browser itself. Transparent areas become white in JPG and BMP. |
-| SVG → image | Drawn at the size you pick (at least 1024 px on the long side), so it stays sharp. Scripts and outside links inside an SVG are never run. |
-| AVIF | Opening AVIF uses the browser. Saving AVIF uses a WebAssembly encoder that loads only when you pick AVIF, and runs in its own worker. It is slow on big photos. |
-| HEIC / HEIF → image | Decoded with libheif (WebAssembly), loaded only when a HEIC file is added. |
-| Quality and size | Three quality levels, and an optional limit on the longest side (3840, 1920 or 1280 px). |
+Kopya is a free file converter. Pick a tool, drop in your files and download the result. Nothing is uploaded to a server, so it is safe to use on confidential documents.
 
-Animated GIFs keep only their first frame. Pictures too large for a browser to handle safely (about 64 megapixels, 36 for AVIF) are shrunk automatically, and Kopya says so.
+*The files in these pictures are made-up samples.*
 
-### Audio
+**[Try it: direkjames.github.io/Kopya](https://direkjames.github.io/Kopya/)**
 
-One tool turns **WAV, OGG, M4A, AAC and FLAC into MP3**, and turns any of them (MP3 included) **into WAV**. MP3 bitrates: 128, 192, 256 and 320 kbps. Audio is saved at 44.1 kHz; mono stays mono, and surround is mixed down to stereo. Files over 150 MB or 3 hours are refused, because the browser has to hold the whole decoded track in memory. Which formats can be *opened* depends on the browser: Chrome, Edge and Safari play M4A/AAC, while Safari can’t open OGG.
+</div>
 
-The three “to PDF” tools save each page as a picture, so the text in those PDFs can’t be searched or copied. Old `.doc` and `.ppt` files need to be saved as `.docx` / `.pptx` first.
+## Features
 
-## Put it on GitHub Pages
+**From PDF**
+- **PDF to Word:** editable text with headings, bold and italics, or an "exact look" mode that keeps each page as a picture
+- **PDF to JPG:** a picture of every page, downloaded as a ZIP when there are several
+- **PDF to Excel:** rows and columns rebuilt from the text, best on simple tables
+- **PDF to EPUB:** a reflowable e-book with chapters taken from the headings
 
-1. Create a new repository on GitHub, for example `kopya`.
-2. Upload everything in this folder to the repository (on the repo page: **Add file → Upload files**, then drag in all the files and folders, keeping the folder structure).
-3. Go to **Settings → Pages**. Under **Build and deployment**, set **Source** to *Deploy from a branch*, choose the `main` branch and the `/ (root)` folder, then **Save**.
-4. After a minute or two the site is live at `https://YOUR-USERNAME.github.io/kopya/`.
+**To PDF**
+- **Word to PDF:** keeps styles, lists, tables, pictures, headers, footers and page numbers
+- **PowerPoint to PDF:** keeps themes, layouts, text, shapes, pictures, tables and SmartArt
+- **EPUB to PDF:** A5, A4 or Letter pages with page numbers and the cover
 
-The `.nojekyll` file tells GitHub Pages to serve the files exactly as they are.
+**Images**
+- Convert between JPG, PNG, WebP, AVIF and BMP, and open GIF, SVG and iPhone HEIC photos
+- Three quality levels, and an optional limit on the longest side (3840, 1920 or 1280 px)
+- Very large pictures are shrunk automatically, and Kopya tells you
 
-You can link straight to one tool by adding its name after `#`, for example `https://YOUR-USERNAME.github.io/kopya/#pdf-to-word`.
+**Audio**
+- Turn WAV, OGG, M4A, AAC and FLAC into MP3 at 128, 192, 256 or 320 kbps
+- Turn any of them, MP3 included, into WAV
 
-## Try it on your computer
+**Good to know**
+- Drop in several files at once and download each result
+- Open a tool directly with a link such as `#pdf-to-word`
+- The "to PDF" tools save each page as a picture, so the text in those PDFs can't be searched or copied
+- Old `.doc` and `.ppt` files need to be saved as `.docx` and `.pptx` first
+- DRM-protected e-books can't be converted, and animated GIFs keep only their first frame
+- Audio files over 150 MB or 3 hours are refused
 
-Browsers block the converters when the page is opened as a plain file, so serve the folder instead:
+## Getting started
 
-```
-python3 -m http.server 8000
-```
+1. Open [direkjames.github.io/Kopya](https://direkjames.github.io/Kopya/).
+2. Choose a tool from the list on the left.
+3. Drop your files in, or press **Choose files**.
+4. Press **Download** next to each finished file.
 
-Then open `http://localhost:8000`.
+## Requirements
 
-## How it’s built
+- A modern web browser (Chrome, Edge, Firefox or Safari)
+- An internet connection the first time the page loads. Which audio formats can be opened depends on your browser; Safari can't open OGG.
 
-There’s no build step: plain HTML, CSS and JavaScript modules.
+## Built with
 
-```
-index.html          the page
-css/style.css       styles (light and dark)
-js/app.js           tool list, file queue, downloads
-js/converters/      one file per conversion, loaded only when used
-js/lib/             shared code: PDF text reading, page layout, Word and PowerPoint renderers, XLSX and EPUB writers, image reading and resizing
-vendor/             the open-source libraries Kopya uses (PDF.js, pdf-lib, docx, JSZip, html-to-image, lamejs, libheif, the AVIF encoder)
-```
+- HTML, CSS and JavaScript, with no build step
+- [PDF.js](https://mozilla.github.io/pdf.js/), [pdf-lib](https://pdf-lib.js.org), [docx](https://docx.js.org), [JSZip](https://stuk.github.io/jszip/) and [html-to-image](https://github.com/bubkoo/html-to-image)
+- [lamejs](https://github.com/zhuker/lamejs) for MP3, [libheif](https://github.com/strukturag/libheif) for HEIC and [jSquash](https://github.com/jamsinclair/jSquash) for AVIF
 
-The libraries are included in the repository rather than loaded from a CDN, so the site keeps working even if a CDN is down. The large ones (the AVIF encoder is 3.5 MB, libheif 1.4 MB) are fetched only when you use them. Their licenses are in `vendor/licenses/THIRD-PARTY-NOTICES.txt`.
+All libraries are bundled, so Kopya doesn't depend on a CDN. Want to run it yourself? See [Developing Kopya](docs/DEVELOPING.md).
+
+## Status
+
+Shipped.
+
+## Credits / License
+
+Made by [direkjames](https://github.com/direkjames). Third-party licenses are in [vendor/licenses/THIRD-PARTY-NOTICES.txt](vendor/licenses/THIRD-PARTY-NOTICES.txt). See [LICENSE](LICENSE).
